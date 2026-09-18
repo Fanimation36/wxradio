@@ -2,8 +2,8 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>My Weather Radio</title><link rel="stylesheet" href="css/site.css"></head>
 <body><header><div class="wrap"><h1>My Weather Radio</h1><p>Live NOAA Weather Radio receiver stream</p></div></header>
-<main class="wrap"><section class="station"><div class="top"><div><div id="status" class="status offline">OFFLINE</div><h2>WXM49 — Marion, Illinois</h2><p class="freq">162.425 MHz · NOAA Weather Radio</p></div><div class="listeners"><strong id="listeners">0</strong><span>listeners</span></div></div>
-<audio id="player" controls preload="none"><source src="http://localhost:8000/wxm49" type="audio/mpeg"></audio>
+<main class="wrap"><section class="station"><div class="top"><div><div id="status" class="status offline">OFFLINE</div><h2>WXM49 — Marion, Illinois</h2><p class="freq">162.425 MHz · NOAA Weather Radio</p></div><div class="listeners"><strong id="listeners">—</strong><span>listeners</span></div></div>
+<audio id="player" controls preload="metadata"><source src="http://localhost:8000/wxm49" type="audio/mpeg"></audio>
 <div class="details"><span id="format">Waiting for Icecast…</span><span id="server">Icecast</span></div></section>
-<p class="note">Local development page. Public stream URL can be configured when this package is moved to the broadcast laptop.</p></main>
+<p class="note">Live WXM49 receiver stream. Status is detected from the audio connection for GitHub Pages/mobile compatibility.</p></main>
 <script src="js/site.js"></script></body></html>
