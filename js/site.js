@@ -1,4 +1,4 @@
-const ICECAST='http://localhost:8000';
+const ICECAST='http://97.187.3.156:8000';
 const MOUNT='/wxm49';
 const statusEl=document.getElementById('status'), listenersEl=document.getElementById('listeners'), formatEl=document.getElementById('format'), serverEl=document.getElementById('server');
 function sources(data){const s=data?.icestats?.source;if(!s)return[];return Array.isArray(s)?s:[s]}
