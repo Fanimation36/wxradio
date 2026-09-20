@@ -1,60 +1,39 @@
 const ICECAST = 'https://wxm49.duckdns.org';
 const MOUNT = '/wxm49';
-
 const statusEl = document.getElementById('status');
 const listenersEl = document.getElementById('listeners');
 const formatEl = document.getElementById('format');
 const serverEl = document.getElementById('server');
-const serverDetailEl = document.getElementById('server-detail');
 const player = document.getElementById('player');
 
-function setStatus(label, kind) {
-  if (!statusEl) return;
-  statusEl.className = `status ${kind}`;
-  statusEl.innerHTML = `<span class="status-dot"></span><span>${label}</span>`;
+function status(mode,label){
+  statusEl.className='status '+mode;
+  statusEl.innerHTML='<span></span>'+label;
 }
+function setLive(){status('live','LIVE')}
+function setOffline(){status('offline','OFFLINE');listenersEl.textContent='—'}
 
-function normalizeSources(source) {
-  if (!source) return [];
-  return Array.isArray(source) ? source : [source];
-}
-
-async function refreshIcecastStatus() {
-  try {
-    const response = await fetch(`${ICECAST}/status-json.xsl`, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-    const stats = data.icestats || {};
-    const sources = normalizeSources(stats.source);
-    const source = sources.find(s => s && (s.listenurl?.endsWith(MOUNT) || s.server_name === 'WXM49')) || sources[0];
-
-    if (!source) {
-      setStatus('OFFLINE', 'offline');
-      listenersEl.textContent = '0';
-      return;
-    }
-
-    setStatus('LIVE', 'live');
-    listenersEl.textContent = source.listeners ?? 0;
-
-    const bitrate = source.bitrate || source.audio_bitrate;
-    const type = (source.server_type || 'audio/mpeg').replace('audio/', '').toUpperCase();
-    formatEl.textContent = `${bitrate ? `${bitrate} kbps • ` : ''}${type}${source.channels === 1 ? ' • Mono' : ''}`;
-    serverEl.textContent = stats.server_id || 'Icecast';
-    if (serverDetailEl) serverDetailEl.textContent = stats.server_id || 'Icecast';
-  } catch (error) {
-    // If the status API is temporarily unavailable, audio events still provide a useful fallback.
-    if (player && !player.paused && !player.error) setStatus('LIVE', 'live');
-    else setStatus('READY', 'ready');
-    listenersEl.textContent = '—';
+async function refreshStatus(){
+  try{
+    const r=await fetch(`${ICECAST}/status-json.xsl`,{cache:'no-store'});
+    if(!r.ok) throw new Error('status');
+    const data=await r.json();
+    let source=data?.icestats?.source;
+    if(!source){setOffline();return}
+    if(!Array.isArray(source)) source=[source];
+    const feed=source.find(s=>s.listenurl?.endsWith(MOUNT)||s.mount===MOUNT)||source[0];
+    setLive();
+    listenersEl.textContent=feed.listeners ?? 0;
+    const kbps=feed.bitrate || feed.audio_bitrate || 64;
+    formatEl.textContent=`${kbps} kbps · MP3 · Mono`;
+    serverEl.textContent=data.icestats.server_id || 'Icecast';
+  }catch(e){
+    // Cross-origin/status failures should not falsely mark a playable stream offline.
+    if(player && !player.error && !player.paused) setLive();
   }
 }
-
-if (player) {
-  player.addEventListener('playing', () => setStatus('LIVE', 'live'));
-  player.addEventListener('error', () => setStatus('OFFLINE', 'offline'));
-}
-
-setStatus('CHECKING', 'checking');
-refreshIcecastStatus();
-setInterval(refreshIcecastStatus, 15000);
+player?.addEventListener('playing',setLive);
+player?.addEventListener('canplay',()=>{ if(statusEl.textContent.includes('CHECKING')) setLive(); });
+player?.addEventListener('error',setOffline);
+refreshStatus();
+setInterval(refreshStatus,15000);

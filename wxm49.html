@@ -3,120 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#071827">
-  <title>WXM49 • Marion, Illinois | NWR Streams</title>
+  <meta name="theme-color" content="#071a2a">
+  <title>WXM49 Marion, Illinois | NWR Streams</title>
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <header class="masthead">
-    <div class="wrap masthead-inner">
-      <a class="brand" href="wxm49.html" aria-label="NWR Streams home">
-        <span class="brand-mark" aria-hidden="true"><span class="tower">⌁</span></span>
-        <span><strong>NWR <em>STREAMS</em></strong><small>Live NOAA Weather Radio Audio</small></span>
-      </a>
-      <div class="header-copy">REAL RECEIVERS <span>•</span> REAL WEATHER <span>•</span> REAL TIME</div>
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="brand-mark" aria-hidden="true"><span></span><i></i><b></b></div>
+    <div class="brand-copy"><h1>NWR <em>STREAMS</em></h1><p>Real receivers. Real weather. Real time.</p></div>
+    <div class="hero-tag">LIVE NOAA WEATHER RADIO AUDIO</div>
+  </div>
+</header>
+<nav class="nav"><div class="wrap"><a class="active" href="wxm49.html">WXM49</a><a href="#coverage">Coverage</a><a href="#station-info">Station info</a><a href="#about">About NWR</a></div></nav>
+
+<main class="wrap layout">
+  <section class="card player-card">
+    <div class="station-head">
+      <div><div class="eyebrow">MARION, ILLINOIS</div><h2>WXM49</h2><div class="frequency">162.425 <span>MHz</span></div><p>NOAA Weather Radio · NWS Paducah</p></div>
+      <div class="live-stack"><div id="status" class="status checking"><span></span>CHECKING</div><div class="listeners"><strong id="listeners">—</strong><small>listeners</small></div></div>
     </div>
-  </header>
+    <audio id="player" controls preload="metadata"><source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">Your browser does not support HTML audio.</audio>
+    <div class="stream-strip"><span><i class="pulse-dot"></i> Live receiver feed</span><span id="format">MP3 · 64 kbps · Mono</span><span id="server">Icecast</span></div>
+  </section>
 
-  <nav class="nav" aria-label="Primary navigation">
-    <div class="wrap nav-inner">
-      <a class="active" href="wxm49.html">Home</a>
-      <a href="#coverage">Coverage</a>
-      <a href="#station-info">Station Info</a>
-      <a href="#about-nwr">About NWR</a>
-    </div>
-  </nav>
-
-  <main class="wrap page-grid">
-    <section class="panel hero-panel" aria-labelledby="station-title">
-      <div class="hero-top">
-        <div>
-          <p class="eyebrow">NOAA WEATHER RADIO • SOUTHERN ILLINOIS</p>
-          <h1 id="station-title">WXM49</h1>
-          <p class="location">Marion, Illinois</p>
-          <p class="frequency">162.425 <span>MHz</span></p>
-        </div>
-        <div class="live-block">
-          <div id="status" class="status checking"><span class="status-dot"></span><span>CHECKING</span></div>
-          <div class="listener-row"><strong id="listeners">—</strong> <span>listeners</span></div>
-        </div>
-      </div>
-
-      <div class="player-shell">
-        <div class="player-label"><span class="signal-icon">◉</span> LIVE RECEIVER AUDIO</div>
-        <audio id="player" controls preload="none">
-          <source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">
-          Your browser does not support HTML5 audio.
-        </audio>
-        <div class="stream-meta"><span id="format">MP3 • 64 kbps • Mono</span><span id="server">Icecast</span></div>
-      </div>
-
-      <div class="receiver-note">
-        <span class="receiver-icon">⌁</span>
-        <div><strong>Live receiver feed</strong><p>Audio is received locally and relayed in real time. Expect a short streaming delay.</p></div>
-      </div>
-    </section>
-
-    <section class="panel coverage-panel" id="coverage" aria-labelledby="coverage-title">
-      <div class="panel-heading"><div><span class="kicker">WXM49</span><h2 id="coverage-title">Approximate Coverage</h2></div><span class="map-chip">ILLINOIS</span></div>
-      <div class="state-map" role="img" aria-label="Stylized map of Illinois showing the approximate WXM49 reception area around Marion">
-        <svg viewBox="0 0 430 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <section class="card coverage-card" id="coverage">
+    <div class="card-title"><div><span class="kicker">SIGNAL VIEW</span><h3>WXM49 Coverage</h3></div><span class="map-label">Southern Illinois</span></div>
+    <div class="coverage-grid">
+      <div class="state-map" role="img" aria-label="Stylized map of Illinois showing WXM49 in southern Illinois and approximate reception rings">
+        <svg viewBox="0 0 360 570" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="coverageGlow">
-              <stop offset="0" stop-color="#37d96f" stop-opacity=".38"/>
-              <stop offset=".55" stop-color="#37d96f" stop-opacity=".20"/>
-              <stop offset="1" stop-color="#37d96f" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8eef3"/><stop offset="1" stop-color="#aebbc6"/></linearGradient>
+            <radialGradient id="signal"><stop stop-color="#29c86f" stop-opacity=".38"/><stop offset=".65" stop-color="#29c86f" stop-opacity=".16"/><stop offset="1" stop-color="#29c86f" stop-opacity="0"/></radialGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
           </defs>
-          <path class="state-shape" d="M167 24 L267 30 L275 54 L267 80 L281 112 L274 145 L289 174 L280 208 L290 238 L279 270 L286 299 L269 326 L270 350 L253 371 L246 402 L222 423 L213 459 L192 477 L178 459 L170 427 L148 404 L142 374 L124 351 L129 321 L112 293 L122 264 L111 237 L124 211 L116 180 L129 154 L122 125 L137 100 L132 72 L151 53 Z"/>
-          <path class="river-line" d="M151 53 C145 90 152 119 139 151 C126 182 137 207 124 237 C111 268 132 293 124 322 C117 349 145 371 147 402"/>
-          <circle cx="208" cy="380" r="105" fill="url(#coverageGlow)"/>
-          <circle class="range range-outer" cx="208" cy="380" r="91"/>
-          <circle class="range range-inner" cx="208" cy="380" r="53"/>
-          <circle class="tx-halo" cx="208" cy="380" r="13"/>
-          <circle class="tx" cx="208" cy="380" r="6"/>
-          <path class="leader" d="M217 375 L274 340"/>
-          <text class="map-label callsign" x="282" y="336">WXM49</text>
-          <text class="map-label city" x="282" y="355">Marion</text>
-          <text class="state-label" x="183" y="185">ILLINOIS</text>
+          <path class="illinois" d="M126 18 L248 23 248 65 263 101 256 141 270 178 259 215 267 253 251 292 260 333 247 367 257 404 236 432 224 475 201 511 180 548 151 528 143 492 122 461 116 425 98 390 102 352 86 316 92 279 77 241 89 207 80 171 96 135 91 100 108 67 105 36 Z" fill="url(#land)" stroke="#f7fbff" stroke-width="5"/>
+          <text x="175" y="160" text-anchor="middle" class="state-name">ILLINOIS</text>
+          <circle cx="163" cy="444" r="94" fill="url(#signal)"/>
+          <circle cx="163" cy="444" r="57" class="ring inner"/>
+          <circle cx="163" cy="444" r="92" class="ring outer"/>
+          <circle cx="163" cy="444" r="8" class="tower-dot" filter="url(#glow)"/>
+          <path d="M163 436l-10 25h20zM163 432v-24M150 419q13-13 26 0M142 410q21-22 42 0" class="tower"/>
+          <text x="183" y="452" class="site-label">WXM49</text><text x="183" y="469" class="site-sub">Marion area</text>
+          <text x="163" y="552" text-anchor="middle" class="map-note">Approximate reception display</text>
         </svg>
-        <div class="map-legend"><span><i class="legend-dot inner"></i> stronger area</span><span><i class="legend-dot outer"></i> fringe area</span></div>
       </div>
-      <p class="coverage-disclaimer">Illustrative reception area, not an RF prediction. Terrain, antenna, interference, receiver quality and atmospheric conditions can change actual reception.</p>
-    </section>
-
-    <section class="panel info-panel" id="station-info">
-      <div class="panel-heading"><div><span class="kicker">TECHNICAL</span><h2>Station Information</h2></div></div>
-      <dl class="facts">
-        <div><dt>Callsign</dt><dd>WXM49</dd></div>
-        <div><dt>Frequency</dt><dd>162.425 MHz</dd></div>
-        <div><dt>Transmitter</dt><dd>Marion, Illinois</dd></div>
-        <div><dt>NWS Office</dt><dd>Paducah, Kentucky (PAH)</dd></div>
-        <div><dt>Feed</dt><dd>Live receiver</dd></div>
-        <div><dt>Audio</dt><dd>MP3 • 64 kbps • Mono</dd></div>
-        <div><dt>Server</dt><dd id="server-detail">Icecast</dd></div>
-      </dl>
-    </section>
-
-    <section class="panel nwr-panel" id="about-nwr">
-      <div class="panel-heading"><div><span class="kicker">ALL HAZARDS</span><h2>NOAA Weather Radio</h2></div></div>
-      <div class="nwr-content">
-        <div>
-          <p>NOAA Weather Radio broadcasts National Weather Service forecasts, watches, warnings and other hazard information around the clock.</p>
-          <a class="learn-link" href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">Learn about NOAA Weather Radio ↗</a>
-        </div>
-        <div class="logo-placeholder" aria-label="NOAA Weather Radio logo placeholder">
-          <span>NOAA</span><strong>Weather Radio</strong><small>official logo area</small>
-        </div>
+      <div class="coverage-copy">
+        <div class="metric"><strong>1,000 W</strong><span>Transmitter power</span></div>
+        <div class="metric"><strong>162.425</strong><span>MHz frequency</span></div>
+        <div class="legend"><span><i class="legend-core"></i> nominal ~40 mi</span><span><i class="legend-fringe"></i> fringe / variable</span></div>
+        <p class="map-disclaimer">The rings are a visual reception guide, not an RF prediction. Terrain, antenna height, receiver quality and atmospheric conditions can change reception.</p>
       </div>
-      <p class="trademark-note">The official NOAA Weather Radio All Hazards logo is not bundled with this site package. NOAA/NWS requires written authorization for use of that registered mark.</p>
-    </section>
-  </main>
+    </div>
+    <div class="county-band"><span>NOAA-listed WXM49 coverage:</span> Alexander · Franklin · Hardin · Jackson · Johnson · Massac · Perry · Pope · Pulaski · Saline · Union · Williamson (IL) · Ballard (KY)</div>
+  </section>
 
-  <footer>
-    <div class="wrap footer-inner"><div><strong>NWR <em>STREAMS</em></strong><span>Live receiver audio</span></div><p>Independent receiver stream • Not operated by NOAA or the National Weather Service</p></div>
-  </footer>
-  <script src="js/site.js"></script>
-</body>
-</html>
+  <section class="card info-card" id="station-info"><div class="card-title"><div><span class="kicker">TRANSMITTER</span><h3>Station Information</h3></div></div>
+    <dl><div><dt>Callsign</dt><dd>WXM49</dd></div><div><dt>Frequency</dt><dd>162.425 MHz</dd></div><div><dt>Area</dt><dd>Marion / Southern Illinois</dd></div><div><dt>NWS office</dt><dd>Paducah, Kentucky (PAH)</dd></div><div><dt>Power</dt><dd>1,000 watts</dd></div><div><dt>Feed</dt><dd>Live receiver · MP3 · 64 kbps · Mono</dd></div></dl>
+  </section>
+
+  <section class="card about-card" id="about"><div class="nwr-badge" aria-hidden="true"><b>NWR</b><span>162 MHz</span></div><div><span class="kicker">ALL-HAZARDS RADIO</span><h3>About NOAA Weather Radio</h3><p>NOAA Weather Radio broadcasts official National Weather Service warnings, watches, forecasts and other hazard information around the clock.</p><p class="independent">This is an independent receiver stream and is not operated by NOAA or the National Weather Service.</p></div></section>
+</main>
+<footer><div class="wrap"><strong>NWR <em>STREAMS</em></strong><span>Independent NOAA Weather Radio receiver streaming project</span></div></footer>
+<script src="js/site.js"></script>
+</body></html>
