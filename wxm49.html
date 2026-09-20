@@ -3,67 +3,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#071a2a">
+  <meta name="theme-color" content="#061827">
   <title>WXM49 Marion, Illinois | NWR Streams</title>
-  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/site.css?v=4">
 </head>
 <body>
 <header class="hero">
+  <div class="storm"></div>
   <div class="wrap hero-inner">
-    <div class="brand-mark" aria-hidden="true"><span></span><i></i><b></b></div>
-    <div class="brand-copy"><h1>NWR <em>STREAMS</em></h1><p>Real receivers. Real weather. Real time.</p></div>
-    <div class="hero-tag">LIVE NOAA WEATHER RADIO AUDIO</div>
+    <div class="brand-icon" aria-hidden="true"><span class="waves">((•))</span><span class="mast">△</span></div>
+    <div class="brand-copy">
+      <h1>NWR <em>STREAMS</em></h1>
+      <p>Real Receivers. Real Weather. Real Time.</p>
+      <small>Live NOAA Weather Radio Audio</small>
+    </div>
+    <div class="hero-right"><strong>WEATHER INFORMATION</strong><span>FOR A SAFER TOMORROW</span></div>
   </div>
 </header>
-<nav class="nav"><div class="wrap"><a class="active" href="wxm49.html">WXM49</a><a href="#coverage">Coverage</a><a href="#station-info">Station info</a><a href="#about">About NWR</a></div></nav>
+<nav class="nav"><div class="wrap">
+  <a class="active" href="wxm49.html">⌂ <span>Home</span></a>
+  <a href="#station-info">☷ <span>Station Info</span></a>
+  <a href="#coverage">◉ <span>Coverage</span></a>
+  <a href="#about">ⓘ <span>About</span></a>
+</div></nav>
 
-<main class="wrap layout">
+<main class="wrap dashboard">
   <section class="card player-card">
-    <div class="station-head">
-      <div><div class="eyebrow">MARION, ILLINOIS</div><h2>WXM49</h2><div class="frequency">162.425 <span>MHz</span></div><p>NOAA Weather Radio · NWS Paducah</p></div>
-      <div class="live-stack"><div id="status" class="status checking"><span></span>CHECKING</div><div class="listeners"><strong id="listeners">—</strong><small>listeners</small></div></div>
+    <div class="station-top">
+      <div class="station-copy">
+        <h2>WXM49</h2><h3>Marion, Illinois</h3>
+        <div class="frequency">162.425 MHz</div>
+        <p>NOAA Weather Radio • NWS Paducah</p>
+      </div>
+      <div class="live-column">
+        <div id="status" class="status checking"><i></i>CHECKING</div>
+        <div class="listeners"><span class="person">♟</span><strong id="listeners">—</strong> <span>listeners</span></div>
+        <small>Live receiver feed</small>
+      </div>
     </div>
-    <audio id="player" controls preload="metadata"><source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">Your browser does not support HTML audio.</audio>
-    <div class="stream-strip"><span><i class="pulse-dot"></i> Live receiver feed</span><span id="format">MP3 · 64 kbps · Mono</span><span id="server">Icecast</span></div>
+    <div class="audio-shell"><audio id="player" controls preload="metadata"><source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">Your browser does not support HTML audio.</audio></div>
+    <div class="notice"><span class="radio-symbol">⌁</span><div><strong>You are listening to a live NOAA Weather Radio broadcast.</strong><br><span>This is a real-time receiver feed of WXM49 from Marion, Illinois.</span></div></div>
   </section>
 
   <section class="card coverage-card" id="coverage">
-    <div class="card-title"><div><span class="kicker">SIGNAL VIEW</span><h3>WXM49 Coverage</h3></div><span class="map-label">Southern Illinois</span></div>
-    <div class="coverage-grid">
-      <div class="state-map" role="img" aria-label="Stylized map of Illinois showing WXM49 in southern Illinois and approximate reception rings">
-        <svg viewBox="0 0 360 570" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8eef3"/><stop offset="1" stop-color="#aebbc6"/></linearGradient>
-            <radialGradient id="signal"><stop stop-color="#29c86f" stop-opacity=".38"/><stop offset=".65" stop-color="#29c86f" stop-opacity=".16"/><stop offset="1" stop-color="#29c86f" stop-opacity="0"/></radialGradient>
-            <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-          </defs>
-          <path class="illinois" d="M126 18 L248 23 248 65 263 101 256 141 270 178 259 215 267 253 251 292 260 333 247 367 257 404 236 432 224 475 201 511 180 548 151 528 143 492 122 461 116 425 98 390 102 352 86 316 92 279 77 241 89 207 80 171 96 135 91 100 108 67 105 36 Z" fill="url(#land)" stroke="#f7fbff" stroke-width="5"/>
-          <text x="175" y="160" text-anchor="middle" class="state-name">ILLINOIS</text>
-          <circle cx="163" cy="444" r="94" fill="url(#signal)"/>
-          <circle cx="163" cy="444" r="57" class="ring inner"/>
-          <circle cx="163" cy="444" r="92" class="ring outer"/>
-          <circle cx="163" cy="444" r="8" class="tower-dot" filter="url(#glow)"/>
-          <path d="M163 436l-10 25h20zM163 432v-24M150 419q13-13 26 0M142 410q21-22 42 0" class="tower"/>
-          <text x="183" y="452" class="site-label">WXM49</text><text x="183" y="469" class="site-sub">Marion area</text>
-          <text x="163" y="552" text-anchor="middle" class="map-note">Approximate reception display</text>
-        </svg>
-      </div>
-      <div class="coverage-copy">
-        <div class="metric"><strong>1,000 W</strong><span>Transmitter power</span></div>
-        <div class="metric"><strong>162.425</strong><span>MHz frequency</span></div>
-        <div class="legend"><span><i class="legend-core"></i> nominal ~40 mi</span><span><i class="legend-fringe"></i> fringe / variable</span></div>
-        <p class="map-disclaimer">The rings are a visual reception guide, not an RF prediction. Terrain, antenna height, receiver quality and atmospheric conditions can change reception.</p>
-      </div>
+    <div class="section-head"><h3>Coverage Area</h3><div class="coverage-key"><span><i class="primary-dot"></i>Primary (0–40 miles)</span><span><i class="secondary-dot"></i>Secondary (40–70 miles)</span></div></div>
+    <div class="map-stage">
+      <div class="map-grid"></div>
+      <span class="state-neighbor ia">IA</span><span class="state-neighbor mo">MO</span><span class="state-neighbor in">IN</span><span class="state-neighbor ky">KY</span>
+      <div class="illinois-wrap"><img src="assets/illinois.png" alt="Outline of Illinois"><span class="illinois-name">ILLINOIS</span></div>
+      <div class="signal signal-outer"></div><div class="signal signal-inner"></div>
+      <div class="site-marker"><i></i><strong>WXM49</strong><span>Marion</span></div>
+      <div class="north">N<br><b>⌃</b></div>
+      <div class="scale"><span>0</span><span>25</span><span>50</span><span>100 Miles</span><b></b></div>
+      <div class="map-note">Approximate<br>reception area.<br>Actual coverage<br>may vary.</div>
     </div>
-    <div class="county-band"><span>NOAA-listed WXM49 coverage:</span> Alexander · Franklin · Hardin · Jackson · Johnson · Massac · Perry · Pope · Pulaski · Saline · Union · Williamson (IL) · Ballard (KY)</div>
   </section>
 
-  <section class="card info-card" id="station-info"><div class="card-title"><div><span class="kicker">TRANSMITTER</span><h3>Station Information</h3></div></div>
-    <dl><div><dt>Callsign</dt><dd>WXM49</dd></div><div><dt>Frequency</dt><dd>162.425 MHz</dd></div><div><dt>Area</dt><dd>Marion / Southern Illinois</dd></div><div><dt>NWS office</dt><dd>Paducah, Kentucky (PAH)</dd></div><div><dt>Power</dt><dd>1,000 watts</dd></div><div><dt>Feed</dt><dd>Live receiver · MP3 · 64 kbps · Mono</dd></div></dl>
+  <section class="card info-card" id="station-info">
+    <div class="section-head"><h3>☷ &nbsp;Station Information</h3></div>
+    <dl>
+      <div><dt>Callsign</dt><dd>WXM49</dd></div><div><dt>Frequency</dt><dd>162.425 MHz</dd></div>
+      <div><dt>Location</dt><dd>Marion, Illinois</dd></div><div><dt>NWS Office</dt><dd>Paducah, Kentucky (PAH)</dd></div>
+      <div><dt>Transmitter Power</dt><dd>1,000 Watts</dd></div><div><dt>Audio Format</dt><dd><span id="format">64 kbps • MP3 • Mono</span></dd></div>
+      <div><dt>Coverage</dt><dd>Approximately 40–70 miles</dd></div><div><dt>Counties (IL)</dt><dd>Alexander, Franklin, Hardin, Jackson, Johnson, Massac, Perry, Pope, Pulaski, Saline, Union, Williamson</dd></div>
+      <div><dt>Counties (KY)</dt><dd>Ballard</dd></div><div><dt>Feed Type</dt><dd>Live receiver feed</dd></div><div><dt>Server</dt><dd id="server">Icecast</dd></div>
+    </dl>
   </section>
 
-  <section class="card about-card" id="about"><div class="nwr-badge" aria-hidden="true"><b>NWR</b><span>162 MHz</span></div><div><span class="kicker">ALL-HAZARDS RADIO</span><h3>About NOAA Weather Radio</h3><p>NOAA Weather Radio broadcasts official National Weather Service warnings, watches, forecasts and other hazard information around the clock.</p><p class="independent">This is an independent receiver stream and is not operated by NOAA or the National Weather Service.</p></div></section>
+  <section class="card about-card" id="about">
+    <div class="section-head"><h3>ⓘ &nbsp;About NOAA Weather Radio</h3></div>
+    <div class="about-body"><div>
+      <p>NOAA Weather Radio (NWR) is a nationwide network of radio stations broadcasting weather forecasts, warnings, and other hazard information from the National Weather Service 24 hours a day, 7 days a week.</p>
+      <a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">Learn more at weather.gov/nwr ↗</a>
+    </div><div class="nwr-emblem" aria-label="NOAA Weather Radio information"><strong>NWR</strong><span>ALL HAZARDS</span><small>162 MHz WEATHER RADIO</small></div></div>
+    <div class="safety"><b>◆</b><span>When severe weather threatens, NOAA Weather Radio can provide important warning information. Keep a weather radio available during hazardous weather conditions.</span></div>
+  </section>
 </main>
-<footer><div class="wrap"><strong>NWR <em>STREAMS</em></strong><span>Independent NOAA Weather Radio receiver streaming project</span></div></footer>
-<script src="js/site.js"></script>
+<footer><div class="wrap"><div><strong>NWR <em>STREAMS</em></strong><span>Live NOAA Weather Radio Audio</span></div><nav><a href="wxm49.html">Home</a><a href="#station-info">Station Info</a><a href="#about">About</a></nav><p>An independent NOAA Weather Radio streaming site.<br>Not affiliated with NOAA or the National Weather Service.</p></div></footer>
+<script src="js/site.js?v=4"></script>
 </body></html>
