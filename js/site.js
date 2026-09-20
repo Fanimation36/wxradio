@@ -4,6 +4,7 @@ const statusEl = document.getElementById('status');
 const listenersEl = document.getElementById('listeners');
 const formatEl = document.getElementById('format');
 const serverEl = document.getElementById('server');
+const ICECAST = 'https://wxm49.duckdns.org';
 
 const player = document.getElementById('player');
 
