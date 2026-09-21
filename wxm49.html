@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#061827">
   <title>WXM49 Marion, Illinois | NWR Streams</title>
-  <link rel="stylesheet" href="css/site.css?v=6">
+  <link rel="stylesheet" href="css/site.css?v=7?v=6">
 </head>
 <body>
 <header class="hero">
@@ -36,6 +36,8 @@
         <div id="radioDisplay" class="lcd-main">--:-- --</div>
       </div>
       <button id="weatherButton" class="weather-hotspot" type="button" aria-label="Listen to weather broadcast" title="Weather / Snooze"></button>
+      <button id="volumeUpButton" class="radio-button-hotspot volume-up-hotspot" type="button" aria-label="Increase radio volume" title="Volume Up"></button>
+      <button id="volumeDownButton" class="radio-button-hotspot volume-down-hotspot" type="button" aria-label="Decrease radio volume" title="Volume Down"></button>
     </div>
     <p class="radio-hint"><strong>WEATHER / SNOOZE</strong> turns the radio speaker on or off without disconnecting the live stream. The display shows <b>WEATHER</b> while audible and the current time while muted.</p>
   </section>
@@ -55,6 +57,7 @@
     <div class="section-head listen-head"><h3>🔊 &nbsp;Listen Live</h3><div class="live-summary"><div id="status" class="status checking"><i></i>CHECKING</div><span><strong id="listeners">—</strong> listeners</span></div></div>
     <div class="listen-body">
       <button id="playButton" class="round-play" type="button" aria-label="Play WXM49"><span>▶</span></button>
+      <audio id="buttonPressSound" preload="auto" src="assets/button_press.wav"></audio>
       <audio id="player" preload="none"><source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">Your browser does not support HTML audio.</audio>
       <div class="volume-wrap"><span>🔈</span><input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"><span>🔊</span></div>
       <p>You are listening to a live NOAA Weather Radio broadcast.<br><span>This is a real-time receiver feed of WXM49 from Marion, Illinois.</span></p>
@@ -80,5 +83,5 @@
   </section>
 </main>
 <footer><div class="wrap"><div><strong>NWR <em>STREAMS</em></strong><span>Live NOAA Weather Radio Audio</span></div><nav><a href="wxm49.html">Home</a><a href="#station-info">Station Info</a><a href="#about">About</a></nav><p>An independent NOAA Weather Radio streaming site.<br>Not affiliated with NOAA or the National Weather Service.</p></div></footer>
-<script src="js/site.js?v=6"></script>
+<script src="js/site.js?v=7?v=6"></script>
 </body></html>

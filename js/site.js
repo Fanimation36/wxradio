@@ -10,6 +10,9 @@ const playButton = document.getElementById('playButton');
 const radioDisplay = document.getElementById('radioDisplay');
 const lcdState = document.getElementById('lcdState');
 const volume = document.getElementById('volume');
+const volumeUpButton = document.getElementById('volumeUpButton');
+const volumeDownButton = document.getElementById('volumeDownButton');
+const buttonPressSound = document.getElementById('buttonPressSound');
 
 function status(mode,label){
   statusEl.className='status '+mode;
@@ -33,6 +36,24 @@ function syncRadio(){
     playButton.setAttribute('aria-label',playing?'Pause WXM49':'Play WXM49');
   }
 }
+
+function playButtonPressSound(){
+  if(!buttonPressSound) return;
+  try {
+    buttonPressSound.currentTime = 0;
+    const p = buttonPressSound.play();
+    if(p && typeof p.catch === 'function') p.catch(()=>{});
+  } catch(e) {}
+}
+function changeRadioVolume(delta){
+  if(!player || !volume) return;
+  playButtonPressSound();
+  const next = Math.max(0, Math.min(1, Math.round((player.volume + delta) * 10) / 10));
+  player.volume = next;
+  volume.value = String(next);
+  syncRadio();
+}
+
 async function toggleWeatherAudio(){
   if(!player) return;
   // A browser requires a user gesture before a live stream can start.
@@ -74,6 +95,8 @@ async function refreshStatus(){
   }
 }
 weatherButton?.addEventListener('click',toggleWeatherAudio);
+volumeUpButton?.addEventListener('click',()=>changeRadioVolume(0.1));
+volumeDownButton?.addEventListener('click',()=>changeRadioVolume(-0.1));
 playButton?.addEventListener('click',togglePlayback);
 volume?.addEventListener('input',()=>{
   player.volume=Number(volume.value);
