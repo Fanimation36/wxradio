@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#061827">
   <title>WXM49 Marion, Illinois | NWR Streams</title>
-  <link rel="stylesheet" href="css/site.css?v=4">
+  <link rel="stylesheet" href="css/site.css?v=5">
 </head>
 <body>
 <header class="hero">
@@ -29,35 +28,16 @@
 </div></nav>
 
 <main class="wrap dashboard">
-  <section class="card player-card">
-    <div class="station-top">
-      <div class="station-copy">
-        <h2>WXM49</h2><h3>Marion, Illinois</h3>
-        <div class="frequency">162.425 MHz</div>
-        <p>NOAA Weather Radio • NWS Paducah</p>
+  <section class="radio-card" aria-label="Interactive Midland WR-120 style weather radio">
+    <div class="radio-stage">
+      <img src="assets/wr120.webp" alt="Midland WR-120 weather radio" class="wr120-photo">
+      <div class="radio-lcd" aria-live="polite">
+        <div class="lcd-mini"><span>NOAA</span><span id="lcdState">STANDBY</span></div>
+        <div id="radioDisplay" class="lcd-main">--:-- --</div>
       </div>
-      <div class="live-column">
-        <div id="status" class="status checking"><i></i>CHECKING</div>
-        <div class="listeners"><span class="person">♟</span><strong id="listeners">—</strong> <span>listeners</span></div>
-        <small>Live receiver feed</small>
-      </div>
+      <button id="weatherButton" class="weather-hotspot" type="button" aria-label="Play weather broadcast" title="Weather / Snooze"></button>
     </div>
-    <div class="audio-shell"><audio id="player" controls preload="metadata"><source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">Your browser does not support HTML audio.</audio></div>
-    <div class="notice"><span class="radio-symbol">⌁</span><div><strong>You are listening to a live NOAA Weather Radio broadcast.</strong><br><span>This is a real-time receiver feed of WXM49 from Marion, Illinois.</span></div></div>
-  </section>
-
-  <section class="card coverage-card" id="coverage">
-    <div class="section-head"><h3>Coverage Area</h3><div class="coverage-key"><span><i class="primary-dot"></i>Primary (0–40 miles)</span><span><i class="secondary-dot"></i>Secondary (40–70 miles)</span></div></div>
-    <div class="map-stage">
-      <div class="map-grid"></div>
-      <span class="state-neighbor ia">IA</span><span class="state-neighbor mo">MO</span><span class="state-neighbor in">IN</span><span class="state-neighbor ky">KY</span>
-      <div class="illinois-wrap"><img src="assets/illinois.png" alt="Outline of Illinois"><span class="illinois-name">ILLINOIS</span></div>
-      <div class="signal signal-outer"></div><div class="signal signal-inner"></div>
-      <div class="site-marker"><i></i><strong>WXM49</strong><span>Marion</span></div>
-      <div class="north">N<br><b>⌃</b></div>
-      <div class="scale"><span>0</span><span>25</span><span>50</span><span>100 Miles</span><b></b></div>
-      <div class="map-note">Approximate<br>reception area.<br>Actual coverage<br>may vary.</div>
-    </div>
+    <p class="radio-hint"><strong>WEATHER / SNOOZE</strong> plays or pauses WXM49. The display shows <b>WEATHER</b> while the receiver is playing and the current time while paused.</p>
   </section>
 
   <section class="card info-card" id="station-info">
@@ -71,15 +51,34 @@
     </dl>
   </section>
 
+  <section class="card listen-card">
+    <div class="section-head listen-head"><h3>🔊 &nbsp;Listen Live</h3><div class="live-summary"><div id="status" class="status checking"><i></i>CHECKING</div><span><strong id="listeners">—</strong> listeners</span></div></div>
+    <div class="listen-body">
+      <button id="playButton" class="round-play" type="button" aria-label="Play WXM49"><span>▶</span></button>
+      <audio id="player" preload="none"><source src="https://wxm49.duckdns.org/wxm49" type="audio/mpeg">Your browser does not support HTML audio.</audio>
+      <div class="volume-wrap"><span>🔈</span><input id="volume" type="range" min="0" max="1" step="0.01" value="1" aria-label="Volume"><span>🔊</span></div>
+      <p>You are listening to a live NOAA Weather Radio broadcast.<br><span>This is a real-time receiver feed of WXM49 from Marion, Illinois.</span></p>
+    </div>
+  </section>
+
+  <section class="card coverage-card" id="coverage">
+    <div class="section-head"><h3>Coverage Area</h3><div class="coverage-key"><span><i class="primary-dot"></i>Primary (0–40 miles)</span><span><i class="secondary-dot"></i>Secondary (40–70 miles)</span></div></div>
+    <div class="map-stage">
+      <div class="map-grid"></div>
+      <span class="state-neighbor ia">IA</span><span class="state-neighbor mo">MO</span><span class="state-neighbor in">IN</span><span class="state-neighbor ky">KY</span>
+      <div class="illinois-wrap"><img src="assets/illinois.png" alt="Outline of Illinois"><span class="illinois-name">ILLINOIS</span></div>
+      <div class="signal signal-outer"></div><div class="signal signal-inner"></div>
+      <div class="site-marker"><i></i><strong>WXM49</strong><span>Marion</span></div>
+      <div class="north">N<br><b>⌃</b></div><div class="scale"><span>0</span><span>25</span><span>50</span><span>100 Miles</span><b></b></div>
+      <div class="map-note">Approximate<br>reception area.<br>Actual coverage<br>may vary.</div>
+    </div>
+  </section>
+
   <section class="card about-card" id="about">
     <div class="section-head"><h3>ⓘ &nbsp;About NOAA Weather Radio</h3></div>
-    <div class="about-body"><div>
-      <p>NOAA Weather Radio (NWR) is a nationwide network of radio stations broadcasting weather forecasts, warnings, and other hazard information from the National Weather Service 24 hours a day, 7 days a week.</p>
-      <a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">Learn more at weather.gov/nwr ↗</a>
-    </div><div class="nwr-emblem" aria-label="NOAA Weather Radio information"><strong>NWR</strong><span>ALL HAZARDS</span><small>162 MHz WEATHER RADIO</small></div></div>
-    <div class="safety"><b>◆</b><span>When severe weather threatens, NOAA Weather Radio can provide important warning information. Keep a weather radio available during hazardous weather conditions.</span></div>
+    <div class="about-body"><div><p>NOAA Weather Radio (NWR) is a nationwide network of radio stations broadcasting weather forecasts, warnings, and other hazard information from the National Weather Service 24 hours a day, 7 days a week.</p><a href="https://www.weather.gov/nwr/" target="_blank" rel="noopener">Learn more at weather.gov/nwr ↗</a></div><div class="nwr-emblem"><strong>NWR</strong><span>ALL HAZARDS</span><small>162 MHz WEATHER RADIO</small></div></div>
   </section>
 </main>
 <footer><div class="wrap"><div><strong>NWR <em>STREAMS</em></strong><span>Live NOAA Weather Radio Audio</span></div><nav><a href="wxm49.html">Home</a><a href="#station-info">Station Info</a><a href="#about">About</a></nav><p>An independent NOAA Weather Radio streaming site.<br>Not affiliated with NOAA or the National Weather Service.</p></div></footer>
-<script src="js/site.js?v=4"></script>
+<script src="js/site.js?v=5"></script>
 </body></html>
