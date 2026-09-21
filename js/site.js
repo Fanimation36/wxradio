@@ -23,15 +23,30 @@ function clockText(){
 }
 function syncRadio(){
   const playing = player && !player.paused && !player.ended;
-  radioDisplay.textContent = playing ? 'WEATHER' : clockText();
-  lcdState.textContent = playing ? 'ON AIR' : 'STANDBY';
-  weatherButton?.setAttribute('aria-label', playing ? 'Pause weather broadcast' : 'Play weather broadcast');
+  const audible = playing && !player.muted;
+  radioDisplay.textContent = audible ? 'WEATHER' : clockText();
+  lcdState.textContent = audible ? 'ON AIR' : (playing ? 'MUTED' : 'STANDBY');
+  weatherButton?.setAttribute('aria-label', audible ? 'Mute weather broadcast' : 'Listen to weather broadcast');
   if(playButton){
     playButton.classList.toggle('playing',playing);
     playButton.querySelector('span').textContent = playing ? 'Ⅱ' : '▶';
     playButton.setAttribute('aria-label',playing?'Pause WXM49':'Play WXM49');
   }
 }
+async function toggleWeatherAudio(){
+  if(!player) return;
+  // A browser requires a user gesture before a live stream can start.
+  // The first WEATHER/SNOOZE press starts the stream; after that this button
+  // only toggles the speaker mute state so the stream remains connected.
+  if(player.paused){
+    player.muted = false;
+    try { await player.play(); } catch(e) { console.warn('Playback could not start:',e); }
+  } else {
+    player.muted = !player.muted;
+  }
+  syncRadio();
+}
+
 async function togglePlayback(){
   if(!player) return;
   if(player.paused){
@@ -58,14 +73,19 @@ async function refreshStatus(){
     if(player && !player.error && !player.paused) setLive();
   }
 }
-weatherButton?.addEventListener('click',togglePlayback);
+weatherButton?.addEventListener('click',toggleWeatherAudio);
 playButton?.addEventListener('click',togglePlayback);
-volume?.addEventListener('input',()=>{ player.volume=Number(volume.value); });
+volume?.addEventListener('input',()=>{
+  player.volume=Number(volume.value);
+  if(player.volume > 0 && player.muted) player.muted=false;
+  syncRadio();
+});
 player?.addEventListener('playing',()=>{setLive();syncRadio();});
 player?.addEventListener('pause',syncRadio);
+player?.addEventListener('volumechange',syncRadio);
 player?.addEventListener('ended',syncRadio);
 player?.addEventListener('error',()=>{setOffline();syncRadio();});
-setInterval(()=>{ if(player?.paused) syncRadio(); },1000);
+setInterval(()=>{ if(player?.paused || player?.muted) syncRadio(); },1000);
 syncRadio();
 refreshStatus();
 setInterval(refreshStatus,15000);
