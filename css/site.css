@@ -59,3 +59,17 @@ footer{border-top:1px solid #1c628a;background:#071b2a;padding:20px 0;color:#93c
   }
   .radio-fullscreen-button span{display:none}
 }
+
+
+/* WR-120 responsive LCD typography (v12) */
+.radio-stage{container-type:inline-size}
+.lcd-mini{font-size:clamp(7px,1.55cqw,20px)}
+.lcd-main{
+  font-size:clamp(20px,5.15cqw,76px);
+  line-height:1;
+  letter-spacing:.035em
+}
+.radio-card:fullscreen .lcd-mini,
+.radio-card.is-fullscreen .lcd-mini{font-size:clamp(9px,1.55cqw,20px)}
+.radio-card:fullscreen .lcd-main,
+.radio-card.is-fullscreen .lcd-main{font-size:clamp(24px,5.15cqw,76px)}
