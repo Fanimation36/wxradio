@@ -73,3 +73,35 @@ footer{border-top:1px solid #1c628a;background:#071b2a;padding:20px 0;color:#93c
 .radio-card.is-fullscreen .lcd-mini{font-size:clamp(9px,1.55cqw,20px)}
 .radio-card:fullscreen .lcd-main,
 .radio-card.is-fullscreen .lcd-main{font-size:clamp(24px,5.15cqw,76px)}
+
+
+/* WR-120 LCD sizing correction (v13)
+   Normal view stays at the original v10/v11 size.
+   Fullscreen enlarges the text with the enlarged radio. */
+.lcd-mini{
+  font-size:clamp(7px,1vw,12px);
+}
+.lcd-main{
+  font-size:clamp(21px,4.3vw,49px);
+  line-height:1.05;
+  letter-spacing:.04em;
+}
+.radio-card:fullscreen .lcd-mini,
+.radio-card.is-fullscreen .lcd-mini{
+  font-size:clamp(13px,2.0cqw,26px);
+}
+.radio-card:fullscreen .lcd-main,
+.radio-card.is-fullscreen .lcd-main{
+  font-size:clamp(42px,7.0cqw,100px);
+  line-height:1;
+}
+@media(max-width:900px){
+  .radio-card:not(:fullscreen):not(.is-fullscreen) .lcd-main{
+    font-size:clamp(25px,7vw,50px);
+  }
+}
+@media(max-width:560px){
+  .radio-card:not(:fullscreen):not(.is-fullscreen) .lcd-main{
+    font-size:clamp(19px,8vw,38px);
+  }
+}
