@@ -3,6 +3,28 @@ const $=id=>document.getElementById(id);
 const statusEl=$('status'),listenersEl=$('listeners'),formatEl=$('format'),serverEl=$('server');
 const player=$('player'),weatherButton=$('weatherButton'),playButton=$('playButton'),radioDisplay=$('radioDisplay'),lcdState=$('lcdState'),volume=$('volume'),buttonPressSound=$('buttonPressSound');
 const buttons={menu:$('menuButton'),select:$('selectButton'),up:$('arrowUpButton'),down:$('arrowDownButton'),left:$('arrowLeftButton'),right:$('arrowRightButton'),volUp:$('volumeUpButton'),volDown:$('volumeDownButton')};
+
+const wr120Template=$('wr120Template');
+let backlightTimer=null;
+function wakeBacklight(){
+  if(!wr120Template)return;
+  wr120Template.src='assets/wr120-backlight.png';
+  wr120Template.classList.add('backlight-on');
+  clearTimeout(backlightTimer);
+  backlightTimer=setTimeout(()=>{
+    wr120Template.src='assets/wr120-blank.png';
+    wr120Template.classList.remove('backlight-on');
+  },5000);
+}
+function bindBacklight(el){
+  if(!el)return;
+  el.addEventListener('pointerdown',wakeBacklight);
+  el.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){wakeBacklight();}
+  });
+}
+[weatherButton,...Object.values(buttons)].forEach(bindBacklight);
+
 const CHANNELS=['162.400','162.425','162.450','162.475','162.500','162.525','162.550'];
 const MENU=['SET TIME','SET ALARM','SET LOCATION','SET CHANNEL','ALERT TYPE','ALERT TEST','BUTTON BEEPS','SET EVENTS'];
 const defaults={channel:1,alertType:'VOICE',buttonBeeps:true,eventMode:'ALL DEFAULT',locationMode:'ANY',same:'000000',alarmOn:false,alarmHour:7,alarmMinute:0,clockOffset:0,volume:1};
