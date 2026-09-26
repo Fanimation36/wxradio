@@ -110,3 +110,36 @@ volume?.addEventListener('input',()=>{player.volume=Number(volume.value);cfg.vol
 player?.addEventListener('playing',()=>{setLive();render()});player?.addEventListener('pause',render);player?.addEventListener('volumechange',render);player?.addEventListener('error',()=>{setOffline();render()});
 setInterval(()=>{if(ui.mode!=='clock'&&Date.now()-ui.lastInput>60000){stopAlertTest();exitToClock()}else render()},1000);
 render();refreshStatus();setInterval(refreshStatus,15000);
+
+
+// WR-120 fullscreen mode (v11)
+const radioCard=document.querySelector('.radio-card');
+const radioFullscreenButton=$('radioFullscreenButton');
+
+function radioIsFullscreen(){
+  return document.fullscreenElement===radioCard ||
+         document.webkitFullscreenElement===radioCard;
+}
+function syncFullscreenButton(){
+  if(!radioFullscreenButton)return;
+  const on=radioIsFullscreen();
+  radioFullscreenButton.innerHTML=on?'✕ <span>Exit Fullscreen</span>':'⛶ <span>Fullscreen Radio</span>';
+  radioFullscreenButton.setAttribute('aria-label',on?'Exit radio fullscreen':'View radio fullscreen');
+  radioCard?.classList.toggle('is-fullscreen',on);
+}
+async function toggleRadioFullscreen(){
+  if(!radioCard)return;
+  try{
+    if(radioIsFullscreen()){
+      if(document.exitFullscreen) await document.exitFullscreen();
+      else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }else{
+      if(radioCard.requestFullscreen) await radioCard.requestFullscreen();
+      else if(radioCard.webkitRequestFullscreen) radioCard.webkitRequestFullscreen();
+    }
+  }catch(e){console.warn('Fullscreen unavailable:',e)}
+}
+radioFullscreenButton?.addEventListener('click',toggleRadioFullscreen);
+document.addEventListener('fullscreenchange',syncFullscreenButton);
+document.addEventListener('webkitfullscreenchange',syncFullscreenButton);
+syncFullscreenButton();

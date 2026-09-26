@@ -29,3 +29,33 @@ footer{border-top:1px solid #1c628a;background:#071b2a;padding:20px 0;color:#93c
 .arrow-left-hotspot{left:32.7%;top:42.2%;width:10.5%;height:5.7%}
 .arrow-right-hotspot{left:60.4%;top:42.2%;width:10.5%;height:5.7%}
 .radio-button-hotspot:active,.weather-hotspot:active{filter:brightness(.72);box-shadow:inset 0 4px 8px #0008}
+
+
+/* WR-120 fullscreen mode (v11) */
+.radio-fullscreen-button{
+  display:block;margin:12px auto 4px;padding:9px 15px;border:1px solid #2d81b5;
+  border-radius:8px;background:#0a2a43;color:#dff3ff;font:700 13px/1 system-ui,sans-serif;
+  cursor:pointer;box-shadow:0 3px 10px #0004
+}
+.radio-fullscreen-button:hover{background:#104164;border-color:#45aee9}
+.radio-fullscreen-button:focus-visible{outline:3px solid #55bfff;outline-offset:2px}
+.radio-card:fullscreen,.radio-card.is-fullscreen{
+  width:100vw;height:100vh;max-width:none;margin:0;padding:24px;
+  box-sizing:border-box;background:radial-gradient(circle at 50% 45%,#123b59 0,#071b2a 58%,#03101a 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:auto
+}
+.radio-card:fullscreen .radio-stage,.radio-card.is-fullscreen .radio-stage{
+  width:min(96vw,calc(92vh * 1.16));max-width:1400px;flex:0 1 auto
+}
+.radio-card:fullscreen .radio-hint,.radio-card.is-fullscreen .radio-hint{max-width:900px}
+.radio-card:fullscreen .radio-fullscreen-button,.radio-card.is-fullscreen .radio-fullscreen-button{
+  position:fixed;right:20px;top:18px;z-index:20;margin:0;background:#071b2add
+}
+@media(max-width:600px){
+  .radio-card:fullscreen,.radio-card.is-fullscreen{padding:10px}
+  .radio-card:fullscreen .radio-stage,.radio-card.is-fullscreen .radio-stage{width:98vw}
+  .radio-card:fullscreen .radio-fullscreen-button,.radio-card.is-fullscreen .radio-fullscreen-button{
+    right:10px;top:10px
+  }
+  .radio-fullscreen-button span{display:none}
+}
